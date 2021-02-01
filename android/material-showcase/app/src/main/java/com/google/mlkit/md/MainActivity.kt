@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity() {
         ODT_LIVE(R.string.mode_odt_live_title, R.string.mode_odt_live_subtitle),
         ODT_STATIC(R.string.mode_odt_static_title, R.string.mode_odt_static_subtitle),
         BARCODE_LIVE(R.string.mode_barcode_live_title, R.string.mode_barcode_live_subtitle),
-        CUSTOM_MODEL_LIVE(R.string.custom_model_live_title, R.string.custom_model_live_subtitle)
+        CUSTOM_MODEL_LIVE(R.string.custom_model_live_title, R.string.custom_model_live_subtitle),
+        POSE_LIVE(R.string.mode_pose_live_title, R.string.mode_pose_live_subtitle)
     }
 
     override fun onCreate(bundle: Bundle?) {
@@ -105,6 +106,10 @@ class MainActivity : AppCompatActivity() {
                             activity.startActivity(Intent(activity, LiveBarcodeScanningActivity::class.java))
                         DetectionMode.CUSTOM_MODEL_LIVE ->
                             activity.startActivity(Intent(activity, CustomModelObjectDetectionActivity::class.java))
+                        DetectionMode.POSE_LIVE -> {
+                            activity.startActivity(Intent(activity, PoseDetectionActivity::class.java))
+//                            Toast.makeText(activity, "Pose detection", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
