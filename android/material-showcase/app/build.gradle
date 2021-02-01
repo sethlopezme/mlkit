@@ -60,5 +60,8 @@ dependencies {
     // Custom model
     implementation 'com.google.mlkit:object-detection-custom:16.2.1'
 
+    // Pose detection
+    implementation 'com.google.mlkit:pose-detection:17.0.1-beta2'
+
     api 'com.google.guava:guava:27.1-jre'
 }
