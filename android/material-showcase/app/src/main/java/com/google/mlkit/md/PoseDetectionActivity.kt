@@ -16,6 +16,7 @@ import com.google.mlkit.md.camera.CameraSourcePreview
 import com.google.mlkit.md.camera.GraphicOverlay
 import com.google.mlkit.md.camera.WorkflowModel
 import com.google.mlkit.md.camera.WorkflowModel.WorkflowState
+import com.google.mlkit.md.posedetection.PoseProcessor
 import com.google.mlkit.md.settings.SettingsActivity
 import java.io.IOException
 
@@ -66,6 +67,7 @@ class PoseDetectionActivity : AppCompatActivity(R.layout.activity_live_pose), Vi
 
         workflowModel?.markCameraFrozen()
         currentWorkflowState = WorkflowState.NOT_STARTED
+        cameraSource?.setFrameProcessor(PoseProcessor(graphicOverlay!!, workflowModel!!))
         workflowModel?.setWorkflowState(WorkflowState.DETECTING)
     }
 
@@ -136,6 +138,14 @@ class PoseDetectionActivity : AppCompatActivity(R.layout.activity_live_pose), Vi
                     promptChip?.visibility = View.VISIBLE
                     promptChip?.setText(R.string.prompt_point_at_a_person)
                     startCameraPreview()
+                }
+                WorkflowState.DETECTED -> {
+                    promptChip?.visibility = View.VISIBLE
+                    promptChip?.setText(R.string.prompt_hold_camera_steady)
+                }
+                WorkflowState.CONFIRMED -> {
+                    promptChip?.visibility = View.VISIBLE
+                    promptChip?.setText(R.string.prompt_pose_detected)
                 }
                 else -> {
                     promptChip?.visibility = View.GONE
